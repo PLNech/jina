@@ -3,6 +3,7 @@ import multiprocessing
 import os
 import threading
 import time
+import traceback
 from typing import Any, Tuple, Union, Dict
 
 from .helper import _get_event, ConditionalEvent
@@ -93,7 +94,11 @@ def run(
     else:
         is_started.set()
         with runtime:
-            runtime.run_forever()
+            try:
+                runtime.run_forever()
+            except Exception as e:
+
+                traceback.print_exc()
     finally:
         _unset_envs()
         is_shutdown.set()
