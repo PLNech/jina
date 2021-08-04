@@ -94,11 +94,7 @@ def run(
     else:
         is_started.set()
         with runtime:
-            try:
-                runtime.run_forever()
-            except Exception as e:
-
-                traceback.print_exc()
+            runtime.run_forever()
     finally:
         _unset_envs()
         is_shutdown.set()
